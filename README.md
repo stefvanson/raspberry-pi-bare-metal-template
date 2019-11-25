@@ -9,7 +9,9 @@ includes:
 - A Doxyfile for automatic documentation generation.
 - Tests and the `catch.hpp` header file.
 - A Makefile to run all of the above. It constructs a binary for deploying with
-  or without a bootloader (`_bl` postfix)
+  or without a bootloader (`_bl` postfix).
+- It includes a separate bootloader project as a git submodule. Run `git
+  submodule update` to fetch the correct commit of it.
 
 ## Setup
 This project depends on the following tools to be installed:
@@ -24,6 +26,6 @@ Simply run `make` for building the project and `make doxygen` for generating the
 project documentation in html.
 
 ## TODO
-\todo Add bootloader as git submodule and add flashing instructions accordingly.
+\todo Add flashing/deploying instructions.
 \todo Add code coverage measurement for tests.
 \todo Add style checker and static analyzer?
