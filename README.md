@@ -17,15 +17,16 @@ includes:
 This project depends on the following tools to be installed:
 - doxygen
 - valgrind
+- gcovr
 
 Also, you might have to download the cross compiler [here](https://releases.linaro.org/archive/15.02/components/toolchain/binaries/aarch64-none-elf/)
 and change the first line of the Makefile to where you put it.
 
 ## Building
-Simply run `make` for building the project and `make doxygen` for generating the
-project documentation in html.
+1. Run `make` for building the project.
+2. Run `make doxygen` for generating the project documentation in html.
+3. Run `make coverage` to print coverage reports of the tests.
 
 ## TODO
-\todo Add flashing/deploying instructions.
-\todo Add code coverage measurement for tests.
-\todo Add style checker and static analyzer?
+- \todo Add flashing/deploying instructions.
+- \todo Add style checker and static analyzer?

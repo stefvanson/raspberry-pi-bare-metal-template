@@ -48,7 +48,7 @@ kernel8.img: $(OBJS)
 CXX_HOST = g++
 TESTBUILDDIR = ./testbuild
 
-CXX_FLAGS_TEST = -std=c++11 -Wall -D__HOST__ -Isrc -Itest
+CXX_FLAGS_TEST = -std=c++11 -Wall -D__HOST__ -Isrc -Itest -fprofile-arcs -ftest-coverage
 TEST_FILES := $(shell find test -name '*.cpp')
 TEST_OBJS := $(foreach src, $(CPP_FILES:.cpp=.o), $(TESTBUILDDIR)/$(src)) $(foreach test, $(TEST_FILES:.cpp=.o), $(TESTBUILDDIR)/$(test))
 TEST_OBJS := $(filter-out %/main.o, $(TEST_OBJS))
@@ -68,6 +68,10 @@ regression: $(TEST_OBJS) $(TESTBUILDDIR)/regression
 	@echo "Running regression"
 	@valgrind -q --leak-check=full --error-exitcode=1 $(TESTBUILDDIR)/regression
 
+coverage: regression
+	@gcovr -e test/catch.hpp
+	@gcovr -b -e test/catch.hpp
+
 
 #####################################################
 #				Generate documentation
@@ -86,6 +90,7 @@ doxygen: kernel8.img
 
 clean: clean_build clean_testbuild clean_doxygen
 	rm -rf $(BUILDDIR)/src
+	rm main.gcda main.gcno
 
 clean_build:
 	rm -rf $(BUILDDIR)
